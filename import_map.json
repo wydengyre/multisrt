@@ -1,6 +1,6 @@
 {
   "imports": {
     "neta": "https://deno.land/x/neta@v0.5.5/mod.ts",
-    "std/": "https://deno.land/std@0.162.0/"
+    "std/": "https://deno.land/std@0.163.0/"
   }
 }
