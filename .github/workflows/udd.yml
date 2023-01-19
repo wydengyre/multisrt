@@ -1,0 +1,28 @@
+name: Dependencies
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  udd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: denoland/setup-deno@v1
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: '1.12.0'
+      - name: Update dependencies
+        run: just update-deps
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.2.3
+        with:
+          commit-message: ":arrow_up: Update Dependencies"
+          title: Update Deno Dependencies
+          body: >
+            Dependencies updates using [deno-udd](https://github.com/hayd/deno-udd).
+          branch: update-deno-dependencies
+          author: GitHub <noreply@github.com>
+          delete-branch: true
