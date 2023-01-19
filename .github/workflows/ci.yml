@@ -1,0 +1,16 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch
+
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - uses: extractions/setup-just@v1
+        with:
+          just-version: '1.11.0'
+
+      - name: run docker-based ci
+        run: just docker-ci
