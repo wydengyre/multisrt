@@ -1,5 +1,5 @@
 import { MergedSubtitles, parse, Subtitle } from "./srt.ts";
-import { writeAll } from "std/streams/conversion.ts";
+import { writeAll } from "std/streams/write_all.ts";
 import { renderSubs } from "./render.ts";
 
 const USAGE = "usage: multisrt [srt file 1] [srt file 2...]";

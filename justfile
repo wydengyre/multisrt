@@ -28,3 +28,19 @@ example:
 build:
     mkdir -p dist
     deno bundle src/main.ts dist/multisrt.js
+
+ci: test-all
+
+docker-ci: clean docker-build-image docker-build-multisrt
+
+docker-build-image:
+    docker build -f Dockerfile.build -t multisrt-build .
+
+docker-build-multisrt:
+    #!/usr/bin/env sh
+    set -euxo pipefail
+    docker run --cidfile multisrt.build.cid multisrt-build
+    cid=`cat multisrt.build.cid`
+    rm multisrt.build.cid
+    mkdir -p dist
+    docker cp "$cid":/multisrt/dist/multisrt.js dist/multisrt.js
