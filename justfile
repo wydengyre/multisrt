@@ -41,7 +41,7 @@ docker-build-image:
 
 docker-build-multisrt:
     #!/usr/bin/env sh
-    set -euxo pipefail
+    set -eux
     docker run --cidfile multisrt.build.cid multisrt-build
     cid=`cat multisrt.build.cid`
     rm multisrt.build.cid
