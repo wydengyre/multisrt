@@ -29,7 +29,10 @@ build:
     mkdir -p dist
     deno bundle src/main.ts dist/multisrt.js
 
-ci: test-all
+ci: ci-fmt lint test-all
+
+ci-fmt:
+    deno fmt --check src test
 
 docker-ci: clean docker-build-image docker-build-multisrt
 
