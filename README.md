@@ -19,7 +19,8 @@ To extract subtitles from MKV sources, try [mkvsubs](https://github.com/wydengyr
 # Installation
 
 You'll need [deno](https://deno.land).
-If you build from source, you'll need [just](https://github.com/casey/just).
+If you build from source, you'll need [just](https://github.com/casey/just)
+and [esbuild](https://esbuild.github.io/).
 
 You can install from source:
 
