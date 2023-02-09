@@ -33,17 +33,3 @@ ci: ci-fmt lint test-all
 
 ci-fmt:
     deno fmt --check src test
-
-docker-ci: clean docker-build-image docker-build-multisrt
-
-docker-build-image:
-    docker build -f Dockerfile.build -t multisrt-build .
-
-docker-build-multisrt:
-    #!/usr/bin/env sh
-    set -eux
-    docker run --cidfile multisrt.build.cid multisrt-build
-    cid=`cat multisrt.build.cid`
-    rm multisrt.build.cid
-    mkdir -p dist
-    docker cp "$cid":/multisrt/dist/multisrt.js dist/multisrt.js
