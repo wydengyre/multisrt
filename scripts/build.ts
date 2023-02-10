@@ -18,16 +18,30 @@ async function main() {
     throw `Failed to bundle: ${code}`;
   }
 
-  const buildOptions: esbuild.BuildOptions = {
+  const outText = new TextDecoder().decode(stdout);
+  const cleanedImportMeta = cleanImportMeta(outText);
+
+  const buildOptions: esbuild.TransformOptions = {
     treeShaking: true,
   };
-  const build = await esbuild.transform(stdout, buildOptions);
+  const build = await esbuild.transform(cleanedImportMeta, buildOptions);
   esbuild.stop();
   if (build.warnings.length > 0) {
-    throw `Warnings from esbuild: ${warnings}`;
+    throw `Warnings from esbuild: ${build.warnings}`;
   }
 
   await Deno.writeTextFile(OUT_PATH, build.code);
+}
+
+// The Deno bundler unnecessarily adds an importMeta.url property that leaks details about the build path
+function cleanImportMeta(bundledCode: string): string {
+  const importMetaUrlRegex = /^const importMeta = {\n\s*url:.+,$/m;
+  const found = importMetaUrlRegex.test(bundledCode);
+  if (!found) {
+    throw "Failed to find importMeta.url";
+  }
+
+  return bundledCode.replace(importMetaUrlRegex, "const importMeta = {");
 }
 
 if (import.meta.main) {

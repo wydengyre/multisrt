@@ -26,7 +26,7 @@ example:
     deno run --allow-read src/main.ts test/test.eng.srt test/test.fre.srt test/test.ger.srt test/test.ita.srt test/test.spa.srt > $@
 
 build:
-    deno run --unstable --allow-env --allow-read --allow-write --allow-run --allow-net scripts/build.ts
+    deno run --unstable --check --allow-env --allow-read --allow-write --allow-run --allow-net scripts/build.ts
 
 ci: ci-fmt lint test-all
 
