@@ -30,5 +30,11 @@ jobs:
       - uses: denoland/setup-deno@9db7f66e8e16b5699a514448ce994936c63f0d54 # v1.1.1
         with:
           deno-version: 1.30.3
-      - name: run ci
+      - name: Build and test
         run: just ci
+      - name: Archive artifact
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce #v3.2.1
+        with:
+          name: multisrt.js
+          path: dist/multisrt.js
+          retention-days: 7
