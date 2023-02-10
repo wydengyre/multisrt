@@ -23,7 +23,7 @@ itest: build
 
 example:
     mkdir -p dist
-    deno run --allow-read src/main.ts test/test.eng.srt test/test.fre.srt test/test.ger.srt test/test.ita.srt test/test.spa.srt > $@
+    deno run --allow-read src/main.ts test/test.eng.srt test/test.fre.srt test/test.ger.srt test/test.ita.srt test/test.spa.srt > dist/example.html
 
 build:
     deno run --unstable --check --allow-env --allow-read --allow-write --allow-run --allow-net scripts/build.ts

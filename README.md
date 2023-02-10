@@ -7,6 +7,11 @@ Such students can benefit from reading human translations of movie and televisio
 Audiovisual media are full of speech in the colloquial register, which can be hard to
 study using more traditional sources.
 
+The output looks like this:
+
+![Sample](sample.png)
+
+
 # Usage
 
 English and French: `multisrt subtitles.english.srt subtitles.french.srt`
