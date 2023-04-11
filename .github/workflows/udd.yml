@@ -16,6 +16,10 @@ jobs:
           just-version: '1.13.0'
       - name: Update dependencies
         run: just update-deps
+      - name: Remove lockfile
+        run: rm -f deno.lock
+      - name: Run full ci (will recreate lockfile)
+        run: just ci
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5b4a9f6a9e2af26e5f02351490b90d01eb8ec1e5 # v5.0.0
         with:
